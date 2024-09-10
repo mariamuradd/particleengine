@@ -15,6 +15,8 @@ public class Ball {
     float x, y; //location of the ball
     float radius; //how big the ball is
     int ballColor;
+    float yvel=1;
+    int direction =1;
 
     Ball(float x_, float y_, float radius_, PApplet main_, int c)
     {
@@ -30,7 +32,24 @@ public class Ball {
     {
        main.fill(ballColor);
        main.ellipse(x,y, radius, radius);
+      // background()
+      move();
     }
 
+    void move()
+    {
+        y+=yvel*direction;
+        if(y>main.height){
+            direction=-1;
+        }
+        if(y<0){
+            direction=1;
+        }
+    }
+
+    void flash()
+    {
+        yvel++;
+    }
 
 }

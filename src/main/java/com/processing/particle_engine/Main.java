@@ -10,38 +10,34 @@ import processing.core.*;
 
 public class Main extends PApplet {
 
-    Ball ball; //a ball that we will draw to the screen
+    Balls balls; // a ball that we will draw to the screen
 
-    //sets up processing and prints the hello world message to the console
+    // sets up processing and prints the hello world message to the console
     public static void main(String[] args) {
         PApplet.main("com.processing.particle_engine.Main");
     }
 
-    //sets up the size of the window
+    // sets up the size of the window
     public void settings() {
-    
+
         size(500, 500);
+        balls = new Balls(this);
     }
 
     // changes background color to black
     public void setup() {
-        background(0);
-        ball = new Ball(width/2.0f, height*.10f, 50.f, this, color(random(255), random(255), random(255)));
+        balls.setup();
     }
 
-    //draws everything on the screen
+    // draws everything on the screen
     public void draw() {
 
-        noStroke();
-        ball.draw();
-
+        balls.draw();
 
     }
 
     // will be doing something with particles
-    public void mousePressed()
-    {
-
+    public void mousePressed() {
+        balls.mousePressed();
     }
 }
-
