@@ -43,9 +43,28 @@ public class Balls {
     }
 
     public void mousePressed() {
-      //  ball.flash();
         randomBalls.forEach((ball)->{
             ball.flash();
+        });
+    }
+
+    public void mouseDragged()
+    {
+        randomBalls.forEach((ball)->{
+            ball.changeDirection();
+        });
+    }
+
+    public void mouseMoved()
+    {
+        randomBalls.forEach((ball)->{
+            ball.changeColor();
+        });
+    }
+
+    public void keyPressed(){
+        randomBalls.forEach((ball)->{
+            ball.changeSpeed();
         });
     }
 }

@@ -40,4 +40,22 @@ public class Main extends PApplet {
     public void mousePressed() {
         balls.mousePressed();
     }
+
+    // more mouse interactions
+    public void mouseDragged()
+    {
+        balls.mouseDragged();
+    }
+
+    public void mouseMoved()
+    {
+        balls.mouseMoved();
+    }
+
+    //allows the keyboard to interact
+    public void keyPressed()
+    {
+        balls.keyPressed();
+    }
+
 }
