@@ -20,7 +20,7 @@ public class Main extends PApplet {
     // sets up the size of the window
     public void settings() {
 
-        size(500, 500);
+        size(1500, 1500);
         balls = new Balls(this);
     }
 
