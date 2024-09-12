@@ -2,7 +2,7 @@
  * Name: Maria Murad
  * Project Name: "Particle Engine"
  * Date: September 16th, 2024
- * Description: Bouncing balls depicted that speed up as user interacts with mouse/keyboard.
+ * Description: Bouncing balls depicted that speed up and move as user interacts with mouse/keyboard.
  */
 
 package com.processing.particle_engine;
@@ -51,13 +51,6 @@ public class Ball {
         if (x > main.width - radius || x < radius) {
             directionX *= -1;
         }
-       // y+=yvel*direction;
-       // if(y>main.height){
-       //     direction=-1;
-       // }
-       // if(y<0){
-       //     direction=1;
-       // }
     }
 
     // increases vertical velocity
@@ -72,7 +65,7 @@ public class Ball {
         directionX *= -1;
         directionY *= -1;
     }
-
+ 
     // changes color to a random color
     void changeColor()
     {
