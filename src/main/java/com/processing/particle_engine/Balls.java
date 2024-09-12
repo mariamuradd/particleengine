@@ -1,14 +1,22 @@
+/*
+ * Name: Maria Murad
+ * Project Name: "Particle Engine"
+ * Date: September 16th, 2024
+ * Description: Array of ball particles created with a color coded theme.
+ */
+
 package com.processing.particle_engine;
 
 import java.util.ArrayList;
 
 import processing.core.PApplet;
 
+//balls class that helps with the collection of particles
 public class Balls {
     PApplet main;
     Ball ball;
     ArrayList<Ball> randomBalls;
-    int unit =50;
+    int unit =50; // can adjust unit size to ensure that there are at least 500 particles on the screen
     int count;
 
     Balls(PApplet main) {
@@ -29,14 +37,11 @@ public class Balls {
             }
         }
         System.out.println(randomBalls.size());
-        // ball = new Ball(main.width / 2.0f, main.height * .10f, 50.f, main,
-        //         main.color(main.random(255), main.random(255), main.random(255)));
     }
 
     public void draw() {
         main.noStroke();
         main.background(0);
-       // ball.draw();
         randomBalls.forEach((ball)->{
             ball.draw();
         });

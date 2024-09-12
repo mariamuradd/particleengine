@@ -2,13 +2,14 @@
  * Name: Maria Murad
  * Project Name: "Particle Engine"
  * Date: September 16th, 2024
- * Description: Ball - A bouncing ball. Bounces up and down.
+ * Description: Bouncing balls depicted that speed up as user interacts with mouse/keyboard.
  */
 
 package com.processing.particle_engine;
 
 import processing.core.*;
 
+//ball class that represents inidvidual partciles with their behavior and data
 public class Ball {
     PApplet main; //The main class -- provides all the functionality of processing
 
@@ -17,7 +18,7 @@ public class Ball {
     int ballColor;
     float yvel=1;
     float xvel=1;
-    int direction =1;
+    //int direction =1;
     int directionX =1;
     int directionY =1;
 
@@ -39,13 +40,22 @@ public class Ball {
 
     void move()
     {
-        y+=yvel*direction;
-        if(y>main.height){
-            direction=-1;
+        x += xvel * directionX;
+        y += yvel * directionY;
+
+        if (y > main.height - radius || y < radius) {
+            directionY *= -1;
         }
-        if(y<0){
-            direction=1;
+        if (x > main.width - radius || x < radius) {
+            directionX *= -1;
         }
+       // y+=yvel*direction;
+       // if(y>main.height){
+       //     direction=-1;
+       // }
+       // if(y<0){
+       //     direction=1;
+       // }
     }
 
     void flash()

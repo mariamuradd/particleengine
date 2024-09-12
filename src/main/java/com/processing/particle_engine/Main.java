@@ -8,11 +8,12 @@ package com.processing.particle_engine;
 
 import processing.core.*;
 
+// main class to integrate processing and handle user interactions
 public class Main extends PApplet {
 
     Balls balls; // a ball that we will draw to the screen
 
-    // sets up processing and prints the hello world message to the console
+    // sets up processing
     public static void main(String[] args) {
         PApplet.main("com.processing.particle_engine.Main");
     }
