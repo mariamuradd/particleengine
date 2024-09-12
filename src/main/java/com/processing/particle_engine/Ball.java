@@ -31,6 +31,7 @@ public class Ball {
         main = main_;
     }
 
+    // draws the particle and makes it move
     void draw()
     {
        main.fill(ballColor);
@@ -38,6 +39,7 @@ public class Ball {
        move();
     }
 
+    //this setup helps balls bounce off the top/bottom & left/right edges
     void move()
     {
         x += xvel * directionX;
@@ -58,22 +60,26 @@ public class Ball {
        // }
     }
 
+    // increases vertical velocity
     void flash()
     {
         yvel++;
     }
 
+    // this reverses horizontal and vertical directions
     void changeDirection()
     {
         directionX *= -1;
         directionY *= -1;
     }
 
+    // changes color to a random color
     void changeColor()
     {
         ballColor = main.color(main.random(255), main.random(255),main.random(255));
     }
 
+    // increases horizontal and vertical velocity
     void changeSpeed()
     {
         xvel += 0.5;

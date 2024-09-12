@@ -21,11 +21,11 @@ public class Balls {
 
     Balls(PApplet main) {
         this.main = main;
-        randomBalls = new ArrayList<>();
+        randomBalls = new ArrayList<>(); //initialization of the ArrayList
     }
 
     public void setup() {
-        main.background(0);
+        main.background(0); //sets background color to black
         int wideCount = main.width/unit;
         int heightCount = main.height/unit;
         System.out.println(wideCount);
@@ -33,12 +33,13 @@ public class Balls {
         for(int y=0;y<heightCount;y++){
             for(int x=1;x<wideCount;x++){
                   Ball sampleball = new Ball(x*unit, y*unit, 50.f, main, main.color(main.random(255), main.random(255), main.random(255)));
-                  randomBalls.add(sampleball);
+                  randomBalls.add(sampleball); //adds more particles to the ArrayList
             }
         }
         System.out.println(randomBalls.size());
     }
 
+    // particles are drawn, background is cleared
     public void draw() {
         main.noStroke();
         main.background(0);
@@ -47,12 +48,14 @@ public class Balls {
         });
     }
 
+    // velocity of each particle is increased when the mouse is pressed
     public void mousePressed() {
         randomBalls.forEach((ball)->{
             ball.flash();
         });
     }
 
+    //direction of each particle is changed when the mouse is dragged
     public void mouseDragged()
     {
         randomBalls.forEach((ball)->{
@@ -60,6 +63,7 @@ public class Balls {
         });
     }
 
+    //color of each particle changes when the mouse is moved
     public void mouseMoved()
     {
         randomBalls.forEach((ball)->{
@@ -67,6 +71,7 @@ public class Balls {
         });
     }
 
+    //this changes the speed of each particle
     public void keyPressed(){
         randomBalls.forEach((ball)->{
             ball.changeSpeed();

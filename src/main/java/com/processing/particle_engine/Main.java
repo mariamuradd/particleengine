@@ -37,23 +37,24 @@ public class Main extends PApplet {
 
     }
 
-    // will be doing something with particles
+    // handles the particles with mouse press
     public void mousePressed() {
         balls.mousePressed();
     }
 
-    // more mouse interactions
+    // handles particles with mouse drag and adds more interactivity
     public void mouseDragged()
     {
         balls.mouseDragged();
     }
 
+    // handles particles with mouse move 
     public void mouseMoved()
     {
         balls.mouseMoved();
     }
 
-    //allows the keyboard to interact
+    //allows the keyboard to interact with key press
     public void keyPressed()
     {
         balls.keyPressed();
