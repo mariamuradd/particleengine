@@ -7,6 +7,7 @@
 package com.processing.particle_engine;
 
 import processing.core.*;
+import processing.event.KeyEvent;
 import processing.event.MouseEvent;
 
 // main class to integrate processing and handle user interactions
@@ -58,11 +59,13 @@ public class Main extends PApplet {
     //allows the keyboard to interact with key press
     public void keyPressed()
     {
+        System.out.println("heyy");
         balls.keyPressed();
     }
 
     //allows the particles to move in different directions when mouse clicked
     public void mouseClicked(MouseEvent event){
+        System.out.println(event);
         balls.mouseClicked();
     }
 
