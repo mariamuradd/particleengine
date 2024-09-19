@@ -1,10 +1,3 @@
-/*
- * Name: Maria Murad
- * Project Name: "Particle Engine"
- * Date: September 16th, 2024
- * Description: Array of ball particles created with a color coded theme. There is a lot of interactivity with mouse Click/Drag/Pressed and keyboard.
- */
-
 package com.processing.particle_engine;
 
 import java.util.ArrayList;
@@ -28,12 +21,9 @@ public class Balls {
         triangles = new ArrayList<>();
     }
 
+    // sets up all three particles
     public void setup() {
-        main.background(0); // sets background color to black
-        int wideCount = main.width / unit;
-        int heightCount = main.height / unit;
-        System.out.println(wideCount);
-        System.out.println(heightCount);
+        main.background(0); // sets background color to black;
         float noOfballs = main.random(21, 35);
         for (int i = 0; i < noOfballs; i++) {
 
@@ -47,7 +37,6 @@ public class Balls {
             triangles.add(triangle1);   
             balls.add(sampleBall);
         }
-        System.out.println(balls.size());
     }
 
     // particles are drawn, background is cleared
@@ -63,47 +52,49 @@ public class Balls {
         squares.forEach((squares)->{
             squares.draw();
         });
+
+        // collision for balls
+        for (int i = 0; i < balls.size(); i++) {
+            for (int j = i + 1; j < balls.size(); j++) {
+                balls.get(i).checkCollision(balls.get(j));
+            }
+        }
+    }
+
+    // extra credit?
+    public void mousePressed(float clickX, float clickY)
+    {
+        for(Ball ball : balls){
+            ball.faster();
+            ball.scatterTo(clickX, clickY);
+        }
     }
 
     // velocity of each particle is increased when the mouse is pressed
-    public void mousePressed() {
-        balls.forEach((particle) -> {
-            particle.flash();
-        });
+   // public void mousePressed() {
+       // balls.forEach((particle) -> {
+           // float distance = PApplet.dist(main.mouseX, main.mouseY, particle.position.x,particle.position.y);
+           // particle.flash();
+       // });
 
-    }
+   // }
 
-    // direction of each particle is changed when the mouse is dragged
-    public void mouseDragged() {
-        balls.forEach((particle) -> {
-            particle.changeDirection();
-        });
-    }
-
-    // color of each particle changes when the mouse is moved
-    public void mouseMoved() {
-        balls.forEach((particle) -> {
-            particle.changeColor();
-        });
-        
-    }
-
-    // this changes the speed of each particle when key is pressed
+    // balls: changes the speed when key is pressed / triangles: rotation when key is pressed / squares: change to red when r is pressed
     public void keyPressed() {
         balls.forEach((particle) -> {
             particle.changeSpeed();
         });
 
         triangles.forEach((particle)->{
-            particle.changeSpeed();
+            particle.changeRotate();
         });
 
         squares.forEach((particle)->{
-            particle.changeSpeed();
+            particle.colorChangeForKey(main.key);
         });
     }
 
-    //three different actions for the three different particles when mouse is clicked
+    //balls: when mouse is clicked, balls change colors / squares: when mouse clicked, squares decrease and increase / triangles: when mouse clicked, change directions.
     public void mouseClicked() {
         balls.forEach((particle) -> {
             particle.changeColor();
@@ -112,7 +103,7 @@ public class Balls {
             particle.changeSize();
         });
         triangles.forEach((particle)->{
-             particle.changeRotate();
+             particle.changeTriangleDirection();
         });
     }
     

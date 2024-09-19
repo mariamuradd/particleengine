@@ -38,9 +38,10 @@ public abstract class Particle {
         }
     }
 
-    // vertical velocity increase function
-    public void flash() {
-        yvel++;
+    // velocity increase function
+    public void faster() {
+        yvel+=2;
+        xvel+=2;
     }
 
     // direction change of the particle
