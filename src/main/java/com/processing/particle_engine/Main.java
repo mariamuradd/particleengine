@@ -41,7 +41,6 @@ public class Main extends PApplet {
         balls.mousePressed(mouseX, mouseY);
     }
 
-
     // allows the keyboard to interact with key press
     public void keyPressed() {
         balls.keyPressed();

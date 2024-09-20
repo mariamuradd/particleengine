@@ -37,12 +37,12 @@ public class Ball extends Particle  {
         super.changeSpeed();
     }
 
-    // extra credit?
+    // extra credit :)
     public void scatterTo(float clickX, float clickY){
         float dx = x - clickX;
         float dy = y - clickY;
         float distance = PApplet.dist(x, y, clickX, clickY);
-        if (distance > 100){
+        if (distance < 100){
             xvel = dx / distance * 5;
             yvel = dy / distance * 5;
         }

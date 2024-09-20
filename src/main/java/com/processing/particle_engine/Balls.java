@@ -61,7 +61,7 @@ public class Balls {
         }
     }
 
-    // extra credit?
+    // extra credit
     public void mousePressed(float clickX, float clickY)
     {
         for(Ball ball : balls){
@@ -69,15 +69,6 @@ public class Balls {
             ball.scatterTo(clickX, clickY);
         }
     }
-
-    // velocity of each particle is increased when the mouse is pressed
-   // public void mousePressed() {
-       // balls.forEach((particle) -> {
-           // float distance = PApplet.dist(main.mouseX, main.mouseY, particle.position.x,particle.position.y);
-           // particle.flash();
-       // });
-
-   // }
 
     // balls: changes the speed when key is pressed / triangles: rotation when key is pressed / squares: change to red when r is pressed
     public void keyPressed() {
