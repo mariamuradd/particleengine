@@ -1,3 +1,9 @@
+/*
+ * Name: Maria Murad
+ * Project Name: "Particle Engine"
+ * Date: September 23rd, 2024
+ * Description: This abstract class defines the basic properties and behaviors of a particle. It also includes methods for moving the particle, changing its direction, color, and speed, as well as an abstract method for drawing the particle, that is implemented by subclasses created.
+ */
 package com.processing.particle_engine;
 
 import processing.core.PApplet;

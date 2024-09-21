@@ -1,3 +1,9 @@
+/*
+ * Name: Maria Murad
+ * Project Name: "Particle Engine"
+ * Date: September 23rd, 2024
+ * Description: This class manages a collection of particles including balls, squares, and triangles. It initializes the particles, handles their drawing, and implements various interactions such as mouse and key events to modify particle behavior.
+ */
 package com.processing.particle_engine;
 
 import java.util.ArrayList;

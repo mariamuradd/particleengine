@@ -1,3 +1,9 @@
+/*
+ * Name: Maria Murad
+ * Project Name: "Particle Engine"
+ * Date: September 23rd, 2024
+ * Description: This class represents individual triangle particles. It includes methods for drawing the triangle, changing its color, direction, and rotation. The triangle also rotates when any key is pressed and changes direction when the mouse is clicked.
+ */
 package com.processing.particle_engine;
 
 import processing.core.PApplet;
