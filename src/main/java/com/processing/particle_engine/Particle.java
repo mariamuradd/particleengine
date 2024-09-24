@@ -8,7 +8,7 @@ package com.processing.particle_engine;
 
 import processing.core.PApplet;
 
-public abstract class Particle {
+abstract class Particle {
      PApplet main; // main class -- allows all functions from processing to work
 
     float x, y; // location of the particle

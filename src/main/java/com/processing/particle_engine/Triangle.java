@@ -11,7 +11,7 @@ import processing.core.PConstants;
 
 //triangle class that represents individual triangle particles with their behavior and data
 public class Triangle extends Particle {
-    float angle = 0;
+   private float angle = 0;
 
     //Constructor
     Triangle(float x_, float y_, float radius_, PApplet main_, int c) {
@@ -21,6 +21,7 @@ public class Triangle extends Particle {
     }
 
     // draws individual triangles and rotates them
+    @Override
     public void draw() {
         main.fill(color);
         main.pushMatrix();

@@ -10,7 +10,7 @@ import processing.core.PApplet;
 
 // square class that represents individual square particles with their behavior and data
 public class Square extends Particle {
-    int prevColor;
+    private int prevColor;
     //Constructor
     Square(float x_, float y_, float radius_, PApplet main_, int c)
     {
@@ -19,6 +19,7 @@ public class Square extends Particle {
     }
 
     // draws individual squares and moves them
+    @Override
     public void draw(){
         main.fill(color);
         main.square(x-radius/2, y-radius/2, radius);

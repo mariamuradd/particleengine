@@ -17,7 +17,8 @@ public class Ball extends Particle  {
         super(x_, y_, radius_, main_, c);
     }
 
-    // draws the particle and makes it move
+   // draws the particle and makes it move
+   @Override
    public void draw()
     {
        main.fill(color);
