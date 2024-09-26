@@ -1,7 +1,7 @@
 /*
  * Name: Maria Murad
  * Project Name: "Particle Engine"
- * Date: September 23rd, 2024
+ * Date: September 30th, 2024
  * Description: This class manages a collection of particles including balls, squares, and triangles. It initializes the particles, handles their drawing, and implements various interactions such as mouse and key events to modify particle behavior.
  */
 package com.processing.particle_engine;
@@ -20,6 +20,8 @@ public class Balls {
     private ArrayList<Particle> gameObjects;
     private GameScreen gs;
     private int count;
+    private ArrayList<Integer> countList ;
+    private int MaxCount;
     int screenWidth = 1500;
     int screenHeight = 1500;
     int startTime;
@@ -41,6 +43,7 @@ public class Balls {
         gameStarted = false;
         gameEnded = false;
         startTime = main.millis();
+        countList = new ArrayList<>();
     }
 
     // sets up all three particles
@@ -80,7 +83,8 @@ public class Balls {
             timer();
         }
         if (gameEnded) {
-            gs.displayEndScreen(count);
+          //  gs.displayEndScreen(count);
+          gs.displayNumber(countList);
         }
 
         // collision for balls
@@ -91,7 +95,7 @@ public class Balls {
         }
 
         // when timer hits 60 seconds, end game screen appears
-        if (this.elapsedTime >= 10) {
+        if (this.elapsedTime >= 60) {
             // gameStart = false;
             gameEndMech();
         }
@@ -103,6 +107,8 @@ public class Balls {
         gameBegin = false;
         elapsedTime = 0;
         startTime = main.millis();
+        countList.add(count);
+        MaxCount = Math.max(count, MaxCount);
     }
 
     public void timer() {
@@ -124,6 +130,7 @@ public class Balls {
             gameBegin = false;
             gameStarted = true;
             gameEnded = false;
+            count=0;
         }
         if (gameEnded && main.mouseX > screenWidth / 2 - 100 && main.mouseX < screenWidth / 2 + 100 &&
                 main.mouseY > screenHeight / 2 && main.mouseY < screenHeight / 2 + 60) {

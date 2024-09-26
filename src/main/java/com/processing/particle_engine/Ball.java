@@ -1,7 +1,7 @@
 /* 
  * Name: Maria Murad
  * Project Name: "Particle Engine"
- * Date: September 23rd, 2024
+ * Date: September 30th, 2024
  * Description: This class represents individual ball particles. It includes methods for drawing the ball, changing its direction, color, and speed, as well as handling collisions with other balls and implementing additional interactions such as scattering on mouse click.
  */
 package com.processing.particle_engine;
