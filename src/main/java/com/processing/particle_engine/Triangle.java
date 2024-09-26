@@ -12,17 +12,20 @@ import processing.core.PConstants;
 //triangle class that represents individual triangle particles with their behavior and data
 public class Triangle extends Particle {
     private float angle = 0;
+    public boolean isVisible;
 
     // Constructor
     Triangle(float x_, float y_, float radius_, PApplet main_, int c) {
 
         super(x_, y_, radius_, main_, c);
         this.angle = 0;
+        isVisible = true;
     }
 
     // draws individual triangles and rotates them
     @Override
     public void draw() {
+        if(isVisible){
         main.fill(color);
         main.pushMatrix();
         main.translate(x, y);
@@ -35,6 +38,7 @@ public class Triangle extends Particle {
 
         main.popMatrix();
         super.move();
+        }
     }
 
     // change color of triangles
@@ -63,7 +67,10 @@ public class Triangle extends Particle {
         float x3 = x + radius * PApplet.cos(angle + 2 * PConstants.TWO_PI / 3); // Third vertex
         float y3 = y + radius * PApplet.sin(angle + 2 * PConstants.TWO_PI / 3);
         // Check if the point (mouseX, mouseY) is inside the triangle using a
-        // point-in-triangle test
+        // point-in-triangle test   
+        if(isPointInTriangle(mouseX, mouseY, x1, y1, x2, y2, x3, y3)){
+            isVisible = false;
+        }
         return isPointInTriangle(mouseX, mouseY, x1, y1, x2, y2, x3, y3);
     }
 

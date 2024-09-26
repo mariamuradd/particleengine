@@ -19,12 +19,16 @@ public class Balls {
     private ArrayList<Triangle> triangles;
     private ArrayList<Particle> gameObjects;
     private GameScreen gs;
-    private boolean gameStart;
+    private int count;
     int screenWidth = 1500;
     int screenHeight = 1500;
     int startTime;
     int elapsedTime;
-    private boolean gameEnd;
+
+    // game booleans
+    private boolean gameBegin;
+    private boolean gameStarted;
+    private boolean gameEnded;
 
     Balls(PApplet main) {
         this.main = main;
@@ -32,7 +36,11 @@ public class Balls {
         squares = new ArrayList<>();
         triangles = new ArrayList<>();
         gs = new GameScreen(main);
-        gameStart = false;
+        count = 0;
+        gameBegin = true;
+        gameStarted = false;
+        gameEnded = false;
+        startTime = main.millis();
     }
 
     // sets up all three particles
@@ -61,18 +69,18 @@ public class Balls {
     public void draw() {
         main.noStroke();
         main.background(0);
-        if (!gameStart) {
+        if (gameBegin) {
             gs.displayTitleScreen();
-        }  else if(gameEnd) {
-            gs.displayEndScreen(elapsedTime);
-        }else {
-
+        }
+        if (gameStarted) {
             gameObjects.forEach((particle) -> { // polymorphism - instead of using 3 different for loops, I used 1 with
-                                               // method overriding.
+                // method overriding.
                 particle.draw();
             });
             timer();
-
+        }
+        if (gameEnded) {
+            gs.displayEndScreen(count);
         }
 
         // collision for balls
@@ -81,15 +89,20 @@ public class Balls {
                 balls.get(i).checkCollision(balls.get(j));
             }
         }
-        
+
         // when timer hits 60 seconds, end game screen appears
-        if(elapsedTime>=10){
-            //gameStart = false;
-            gameEnd=true;
-            elapsedTime = 0;
-            System.out.println(elapsedTime);
-           
+        if (this.elapsedTime >= 10) {
+            // gameStart = false;
+            gameEndMech();
         }
+    }
+
+    public void gameEndMech() {
+        gameEnded = true;
+        gameStarted = false;
+        gameBegin = false;
+        elapsedTime = 0;
+        startTime = main.millis();
     }
 
     public void timer() {
@@ -104,27 +117,36 @@ public class Balls {
 
     // extra credit
     public void mousePressed(float clickX, float clickY) {
-        if (!gameStart && main.mouseX > screenWidth / 2 - 100 && main.mouseX < screenWidth / 2 + 100 && // click on
-                                                                                                        // start to
-                                                                                                        // begin the
-                                                                                                        // game
+        //
+        if (gameBegin && main.mouseX > screenWidth / 2 - 100 && main.mouseX < screenWidth / 2 + 100 &&
                 main.mouseY > screenHeight / 2 && main.mouseY < screenHeight / 2 + 60) {
-            gameStart = true; // Transition to the game screen
+            // Transition to the game screen
+            gameBegin = false;
+            gameStarted = true;
+            gameEnded = false;
         }
-        for (Ball ball : balls) {
-            ball.faster();
-            ball.scatterTo(clickX, clickY);
+        if (gameEnded && main.mouseX > screenWidth / 2 - 100 && main.mouseX < screenWidth / 2 + 100 &&
+                main.mouseY > screenHeight / 2 && main.mouseY < screenHeight / 2 + 60) {
+            // Transition to the game screen
+            gameBegin = true;
+            gameStarted = false;
+            gameEnded = false;
+        }
+        if (gameStarted) {
+            for (Ball ball : balls) {
+                ball.scatterTo(clickX, clickY);
+            }
+
+            for (Triangle triangle : triangles) {
+                if (triangle.isVisible) {
+                    if (triangle.isClicked(main.mouseX, main.mouseY)) {
+                        count++;
+                    }
+                }
+            }
+            gameObjects.addAll(triangles);
         }
 
-        for (int i = triangles.size() - 1; i >= 0; i--) {
-            Triangle triangle = triangles.get(i);
-            if (triangle.isClicked(clickX, clickY)) {
-                System.out.println("triangle");
-                triangles.remove(i); // Remove the triangle from the list if clicked
-              //  break; // Exit the loop once a triangle is removed
-            }
-        }
-        gameObjects.addAll(triangles);
     }
 
     // balls: changes the speed when key is pressed / triangles: rotation when key

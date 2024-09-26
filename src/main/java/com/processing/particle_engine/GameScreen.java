@@ -62,7 +62,7 @@ void displayEndScreen(int score) {
     // draw Restart Button text
     main.fill(255);
     main.textSize(32);
-    main.text("Restart", screenWidth / 2 - 50, buttonY + buttonHeight / 2 + 10);
+    main.text("Restart", screenWidth / 2 - 30, buttonY + buttonHeight / 2 + 10);
 }
 
 }
