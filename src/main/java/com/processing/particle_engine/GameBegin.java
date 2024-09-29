@@ -7,5 +7,6 @@ public class GameBegin extends GameController {
     //Constructor
     GameBegin(PApplet main_){
     super(main_);
+    
     }
 }
