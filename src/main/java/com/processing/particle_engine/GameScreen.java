@@ -86,7 +86,7 @@ public class GameScreen {
              main.text("Player "+ (i+1)+" Count is: "+count.get(i),main.width/2,yOffset+i*30);
          }
 
-         //highest score revealed between all players in the game session
+         //highest score revealed then game over screen 
          int maxCount = Collections.max(count);
          main.text("Highest Score: "+maxCount, main.width/2, 150);
          main.text("Game Over", main.width/2, 100); // center the text

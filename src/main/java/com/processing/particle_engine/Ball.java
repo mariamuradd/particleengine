@@ -44,7 +44,7 @@ public class Ball extends Particle  {
         super.changeSpeed();
     }
 
-    // extra credit :)
+    // extra credit previous :)
     public void scatterTo(float clickX, float clickY){
         float dx = x - clickX;
         float dy = y - clickY;

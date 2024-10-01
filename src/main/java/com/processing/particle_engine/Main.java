@@ -6,13 +6,17 @@
  */
 package com.processing.particle_engine;
 
+import java.util.ArrayList;
+
 import processing.core.*;
 import processing.event.MouseEvent;
 
 // main class to integrate processing and handle user interactions
 public class Main extends PApplet {
 
-    Balls balls; // a ball that we will draw to the screen
+    // GameStarted balls; // a ball that we will draw to the screen
+    ArrayList<GameController> gameControllers;
+    int curState=0;
 
     // sets up processing
     public static void main(String[] args) {
@@ -23,32 +27,40 @@ public class Main extends PApplet {
     public void settings() {
 
         size(1500, 1500);
-        balls = new Balls(this);
+        gameControllers = new ArrayList<>();
+        gameControllers.add(new GameBegin(this));
+        gameControllers.add(new GameStarted(this));
+        gameControllers.add(new GameEnded(this));
     }
 
     // sets up project
     public void setup() {
-        balls.setup();
+        gameControllers.forEach((item)->{
+            item.setup();
+        });
     }
 
     // draws everything on the screen
     public void draw() {
-        balls.draw();
+        gameControllers.get(curState).draw();
+        curState = gameControllers.get(curState).getCurState();
+        gameControllers.get(curState).setCurState(curState);
     }
 
     // handles the particles with mouse press
     public void mousePressed() {
-        balls.mousePressed(mouseX, mouseY);
+        gameControllers.get(curState).mousePressed(mouseX, mouseY);
+       
     }
 
     // allows the keyboard to interact with key press
     public void keyPressed() {
-        balls.keyPressed();
+        gameControllers.get(curState).keyPressed();
     }
 
     // allows the particles to move in different directions when mouse clicked
     public void mouseClicked(MouseEvent event) {
-        balls.mouseClicked();
+        gameControllers.get(curState).mouseClicked();
     }
 
 }

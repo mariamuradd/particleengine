@@ -11,9 +11,8 @@ import java.util.ArrayList;
 import processing.core.PApplet;
 import processing.core.PConstants;
 
-//balls class that helps with the collection of particles
-public class Balls {
-    PApplet main;
+//GameStarted class that helps game state when running and manages interactions of particle
+public class GameStarted  extends GameController{
     private ArrayList<Ball> balls;
     private ArrayList<Square> squares;
     private ArrayList<Triangle> triangles;
@@ -27,26 +26,19 @@ public class Balls {
     int startTime;
     int elapsedTime;
 
-    // game booleans
-    private boolean gameBegin;
-    private boolean gameStarted;
-    private boolean gameEnded;
-
-    Balls(PApplet main) {
-        this.main = main;
+    //Constructor
+    GameStarted(PApplet main) {
+        super(main);
         balls = new ArrayList<>(); // initialization of the ArrayList
         squares = new ArrayList<>();
         triangles = new ArrayList<>();
         gs = new GameScreen(main);
         count = 0;
-        gameBegin = true;
-        gameStarted = false;
-        gameEnded = false;
         startTime = main.millis();
         countList = new ArrayList<>();
     }
 
-    // sets up all three particles
+    // sets up all three particles and initializes them with random properties
     public void setup() {
         main.background(0); // sets background color to black;
         float noOfballs = main.random(21, 35);
@@ -72,21 +64,12 @@ public class Balls {
     public void draw() {
         main.noStroke();
         main.background(0);
-        if (gameBegin) {
-            gs.displayTitleScreen();
-        }
-        if (gameStarted) {
-            gameObjects.forEach((particle) -> { // polymorphism - instead of using 3 different for loops, I used 1 with
-                // method overriding.
-                particle.draw();
-            });
-            timer();
-        }
-        if (gameEnded) {
-          //  gs.displayEndScreen(count);
-          gs.displayNumber(countList);
-        }
-
+       
+        gameObjects.forEach((particle) -> { // polymorphism - instead of using 3 different for loops, I used 1 with
+            // method overriding.
+            particle.draw();
+        });
+        timer();
         // collision for balls
         for (int i = 0; i < balls.size(); i++) {
             for (int j = i + 1; j < balls.size(); j++) {
@@ -98,19 +81,22 @@ public class Balls {
         if (this.elapsedTime >= 60) {
             // gameStart = false;
             gameEndMech();
+            count=0;
+        }else{
+             setCurState(GAME_PLAY);
         }
     }
 
+    // resets timer, score saved, switch state
     public void gameEndMech() {
-        gameEnded = true;
-        gameStarted = false;
-        gameBegin = false;
         elapsedTime = 0;
         startTime = main.millis();
-        countList.add(count);
+        addScore(count);
         MaxCount = Math.max(count, MaxCount);
+        setCurState(GAME_END);
     }
 
+    // calculates and displays elapsed time in seconds
     public void timer() {
         int currentTime = main.millis(); // Get the current time in milliseconds
         this.elapsedTime = (currentTime - startTime) / 1000; // Convert to seconds
@@ -121,25 +107,11 @@ public class Balls {
         main.textAlign(PConstants.CENTER, PConstants.CENTER); // Reset text alignment
     }
 
-    // extra credit
+    // extra credit - check if triangle is clicked, increase score
     public void mousePressed(float clickX, float clickY) {
         //
-        if (gameBegin && main.mouseX > screenWidth / 2 - 100 && main.mouseX < screenWidth / 2 + 100 &&
-                main.mouseY > screenHeight / 2 && main.mouseY < screenHeight / 2 + 60) {
-            // Transition to the game screen
-            gameBegin = false;
-            gameStarted = true;
-            gameEnded = false;
-            count=0;
-        }
-        if (gameEnded && main.mouseX > screenWidth / 2 - 100 && main.mouseX < screenWidth / 2 + 100 &&
-                main.mouseY > screenHeight / 2 && main.mouseY < screenHeight / 2 + 60) {
-            // Transition to the game screen
-            gameBegin = true;
-            gameStarted = false;
-            gameEnded = false;
-        }
-        if (gameStarted) {
+       
+    
             for (Ball ball : balls) {
                 ball.scatterTo(clickX, clickY);
             }
@@ -152,8 +124,7 @@ public class Balls {
                 }
             }
             gameObjects.addAll(triangles);
-        }
-
+        
     }
 
     // balls: changes the speed when key is pressed / triangles: rotation when key
@@ -186,5 +157,7 @@ public class Balls {
             particle.changeTriangleDirection();
         });
     }
+
+    
 
 }
