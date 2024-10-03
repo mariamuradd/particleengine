@@ -6,6 +6,8 @@
  */
 package com.processing.particle_engine;
 
+import java.nio.file.FileSystem;
+import java.nio.file.FileSystems;
 import java.util.ArrayList;
 
 import processing.core.*;
@@ -14,9 +16,15 @@ import processing.event.MouseEvent;
 // main class to integrate processing and handle user interactions
 public class Main extends PApplet {
 
+    static FileSystem sys = FileSystems.getDefault();
     // GameStarted balls; // a ball that we will draw to the screen
     ArrayList<GameController> gameControllers;
-    int curState=0;
+    int curState = 0;
+    static String filePath = "mid" + sys.getSeparator();
+
+    String[] midiFiles = { "gardel_por", "MaryHadALittleLamb", "test" };
+
+    MelodyManager melodyManager = new MelodyManager();
 
     // sets up processing
     public static void main(String[] args) {
@@ -31,13 +39,18 @@ public class Main extends PApplet {
         gameControllers.add(new GameBegin(this));
         gameControllers.add(new GameStarted(this));
         gameControllers.add(new GameEnded(this));
+        melodyManager.addmidiFile(filePath);
     }
 
     // sets up project
     public void setup() {
-        gameControllers.forEach((item)->{
+        gameControllers.forEach((item) -> {
             item.setup();
         });
+        addMidiFiles();
+        for (int i = 0; i < midiFiles.length; i++) {
+            melodyManager.start(i);
+        }
     }
 
     // draws everything on the screen
@@ -45,12 +58,19 @@ public class Main extends PApplet {
         gameControllers.get(curState).draw();
         curState = gameControllers.get(curState).getCurState();
         gameControllers.get(curState).setCurState(curState);
+        melodyManager.playMelodies();
+    }
+
+    public void addMidiFiles() {
+        for (int i = 0; i < midiFiles.length; i++) {
+            melodyManager.addmidiFile(filePath + midiFiles[i] + ".mid");
+        }
     }
 
     // handles the particles with mouse press
     public void mousePressed() {
         gameControllers.get(curState).mousePressed(mouseX, mouseY);
-       
+
     }
 
     // allows the keyboard to interact with key press
