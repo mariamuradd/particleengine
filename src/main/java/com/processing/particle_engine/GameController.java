@@ -12,16 +12,18 @@ import processing.core.PApplet;
 
 public abstract class GameController {
 
-    PApplet main;
+    Main main;
     static final int GAME_BEGIN=0;
     static final int GAME_PLAY=1;
     static final int GAME_END=2;
     static ArrayList<Integer> scores = new ArrayList<>();
     int curState;
-    // Constructor
-    GameController(PApplet main_) {
-        main = main_;
+    MelodyManager melodies = null;
 
+    // Constructor
+    GameController(Main main_) {
+        main = main_;
+        melodies= main_.getMelodyManager();
     }
 
     // abstract method for drawing, to be implemented by subclasses
@@ -57,13 +59,14 @@ public abstract class GameController {
         if(scores.isEmpty()) return 0;
         return scores.stream().max(Integer::compareTo).orElse(0);
     }
+    
 }
 
 // Subclass for when the game has ended
 class GameEnded extends GameController {
     
     // Constructor
-    GameEnded(PApplet main_) {
+    GameEnded(Main main_) {
         super(main_);
     }
 
@@ -91,6 +94,8 @@ class GameEnded extends GameController {
  
         // Display restart instructions
         main.text("Press 'Spacebar' to Restart", main.width / 2, yPosition + 50);
+        melodies.playSpecifiMelody(1);
+       // melodies.start(1);
     }
 
    
@@ -108,7 +113,7 @@ class GameEnded extends GameController {
 // Subclass for when the game is beginning
 class GameBegin extends GameController {
 
-    GameBegin(PApplet main_) {
+    GameBegin(Main main_) {
         super(main_);
     }
 
@@ -119,6 +124,8 @@ class GameBegin extends GameController {
         main.fill(0); // color fill to black
         main.textSize(32);
         main.text("Welcome to the Triangle Eater Game!", main.width / 2, main.height / 2);
+        melodies.playSpecifiMelody(1);
+        //melodies.start(1);
     }
 
    // check for key press to start game

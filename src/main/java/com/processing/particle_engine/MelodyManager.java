@@ -20,6 +20,10 @@ public class MelodyManager {
         }
     }
 
+    public void playSpecifiMelody(int index){
+         players.get(index).play();
+    }
+
     void addmidiFile(String filePath) {
          
         int index = players.size();

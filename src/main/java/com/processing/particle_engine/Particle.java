@@ -9,7 +9,7 @@ package com.processing.particle_engine;
 import processing.core.PApplet;
 
 abstract class Particle {
-     PApplet main; // main class -- allows all functions from processing to work
+     Main main; // main class -- allows all functions from processing to work
 
     float x, y; // location of the particle
     float radius; // how big the particle is
@@ -20,7 +20,7 @@ abstract class Particle {
     int directionY = 1;
 
     // Constructor
-    Particle(float x_, float y_, float radius_, PApplet main_, int c) {
+    Particle(float x_, float y_, float radius_, Main main_, int c) {
         x = x_;
         y = y_;
         radius = radius_;
@@ -37,9 +37,16 @@ abstract class Particle {
         y += yvel * directionY;
 
         if (y > main.height - radius || y < radius) {
+            // add the sound 
             directionY *= -1; // top/bottom edge bouncing 
+
+          //  main.getMelodyManager().start(0);
+            main.getMelodyManager().playSpecifiMelody(0);
         }
         if (x > main.width - radius || x < radius) {
+            // add the sound
+           // main.getMelodyManager().start(0);
+            main.getMelodyManager().playSpecifiMelody(0);
             directionX *= -1; // left/right edge bouncing
         }
     }

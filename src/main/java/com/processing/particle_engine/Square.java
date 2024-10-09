@@ -12,7 +12,7 @@ import processing.core.PApplet;
 public class Square extends Particle {
     private int prevColor;
     //Constructor
-    Square(float x_, float y_, float radius_, PApplet main_, int c)
+    Square(float x_, float y_, float radius_, Main main_, int c)
     {
        super(x_, y_, radius_, main_, c);
        this.prevColor = c;

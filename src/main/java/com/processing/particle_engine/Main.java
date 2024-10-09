@@ -58,7 +58,8 @@ public class Main extends PApplet {
         gameControllers.get(curState).draw();
         curState = gameControllers.get(curState).getCurState();
         gameControllers.get(curState).setCurState(curState);
-        melodyManager.playMelodies();
+      //  melodyManager.playMelodies();
+     // melodyManager.playSpecifiMelody(1);
     }
 
     public void addMidiFiles() {
@@ -81,6 +82,12 @@ public class Main extends PApplet {
     // allows the particles to move in different directions when mouse clicked
     public void mouseClicked(MouseEvent event) {
         gameControllers.get(curState).mouseClicked();
+    }
+
+    // provide access in Melody manager
+    public MelodyManager getMelodyManager()
+    {
+        return melodyManager;
     }
 
 }

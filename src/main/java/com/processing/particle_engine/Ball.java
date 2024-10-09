@@ -12,7 +12,7 @@ import processing.core.*;
 public class Ball extends Particle  {
 
     //Constructor
-    Ball(float x_, float y_, float radius_, PApplet main_, int c)
+    Ball(float x_, float y_, float radius_, Main main_, int c)
     {
         super(x_, y_, radius_, main_, c);
     }
@@ -56,7 +56,7 @@ public class Ball extends Particle  {
     }
 
     // when two balls collide with each other, they move away from each other
-    public void checkCollision(Ball other) {
+    public void checkCollision(Ball other, MelodyManager melodies) {
         float dx = other.x - this.x;
         float dy = other.y - this.y;
         float distance = PApplet.sqrt(dx * dx + dy * dy);
@@ -71,6 +71,8 @@ public class Ball extends Particle  {
             float targetY = this.y + PApplet.sin(angle) * minDist;
             float ax = (targetX - other.x) * 0.05f;
             float ay = (targetY - other.y) * 0.05f;
+            // melodies.start(2);
+            // melodies.playSpecifiMelody(2);
  
             // apply the forces to both balls
             this.xvel -= ax;

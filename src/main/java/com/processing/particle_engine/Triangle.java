@@ -15,7 +15,7 @@ public class Triangle extends Particle {
     public boolean isVisible;
 
     // Constructor
-    Triangle(float x_, float y_, float radius_, PApplet main_, int c) {
+    Triangle(float x_, float y_, float radius_, Main main_, int c) {
 
         super(x_, y_, radius_, main_, c);
         this.angle = 0;

@@ -27,7 +27,7 @@ public class GameStarted  extends GameController{
     int elapsedTime;
 
     //Constructor
-    GameStarted(PApplet main) {
+    GameStarted(Main main) {
         super(main);
         balls = new ArrayList<>(); // initialization of the ArrayList
         squares = new ArrayList<>();
@@ -73,7 +73,8 @@ public class GameStarted  extends GameController{
         // collision for balls
         for (int i = 0; i < balls.size(); i++) {
             for (int j = i + 1; j < balls.size(); j++) {
-                balls.get(i).checkCollision(balls.get(j));
+                balls.get(i).checkCollision(balls.get(j), melodies);
+               
             }
         }
 
@@ -123,6 +124,7 @@ public class GameStarted  extends GameController{
                     }
                 }
             }
+           // melodies.playSpecifiMelody(GAME_BEGIN);
             gameObjects.addAll(triangles);
         
     }
