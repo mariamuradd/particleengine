@@ -1,8 +1,8 @@
 /*
  * Name: Maria Murad
  * Project Name: "Particle Engine"
- * Date: September 30th, 2024
- * Description: This class represents individual triangle particles. It includes methods for drawing the triangle, changing its color, direction, and rotation. The triangle also rotates when any key is pressed and changes direction when the mouse is clicked.
+ * Date: October 10th, 2024
+ * Description: This class represents the game screen for the game. Manages and displays both the title screen and the end screen, including buttons for starting and restarting the game. It also shows the player's score.
  */
 package com.processing.particle_engine;
 
@@ -16,6 +16,7 @@ public class GameScreen {
     int screenWidth = 1500;
     int screenHeight = 1500;
 
+    //Constructor
     GameScreen(PApplet main_) { // constructor
         main = main_;
     }

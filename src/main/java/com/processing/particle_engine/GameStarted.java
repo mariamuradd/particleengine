@@ -1,8 +1,8 @@
 /*
  * Name: Maria Murad
  * Project Name: "Particle Engine"
- * Date: September 30th, 2024
- * Description: This class manages a collection of particles including balls, squares, and triangles. It initializes the particles, handles their drawing, and implements various interactions such as mouse and key events to modify particle behavior.
+ * Date: October 10th, 2024
+ * Description: This class manages a collection of particles including balls, squares, and triangles. It initializes the particles with random properties, handles their behavior, and implements various interactions such as collisions, mouse and key events to modify particle behavior. Game includes a 60 second timer, and when timer ends, the game transitions to an end screen logging the player's score.
  */
 package com.processing.particle_engine;
 
@@ -54,7 +54,7 @@ public class GameStarted  extends GameController{
             triangles.add(triangle1);
             balls.add(sampleBall);
         }
-        gameObjects = new ArrayList<>();
+        gameObjects = new ArrayList<>(); // creates a combined list of particles
         gameObjects.addAll(squares);
         gameObjects.addAll(triangles);
         gameObjects.addAll(balls);
@@ -85,6 +85,10 @@ public class GameStarted  extends GameController{
             count=0;
         }else{
              setCurState(GAME_PLAY);
+        }
+        melodies.playSpecifiMelody(1);
+        if(melodies.isEndOfSound(1)){
+            melodies.start(1);
         }
     }
 
@@ -143,6 +147,8 @@ public class GameStarted  extends GameController{
         squares.forEach((particle) -> {
             particle.colorChangeForKey(main.key);
         });
+        melodies.playSpecifiMelody(KEYBORD_MUSIC);
+        melodies.start(KEYBORD_MUSIC);
     }
 
     // balls: when mouse is clicked, balls change colors / squares: when mouse
@@ -159,7 +165,5 @@ public class GameStarted  extends GameController{
             particle.changeTriangleDirection();
         });
     }
-
-    
 
 }

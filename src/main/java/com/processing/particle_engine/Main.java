@@ -1,8 +1,8 @@
 /*
  * Name: Maria Murad
  * Project Name: "Particle Engine"
- * Date: September 30th, 2024
- * Description: Particle Engine Part 2 - CCIII: Creates a particle engine with different shapes and different mouse/key interactions for each particle!
+ * Date: October 10th, 2024
+ * Description: This class creates a particle engine with different shapes and different mouse/key interactions for each particle. It manages the main game loop, user interactions, and melody playback using the MelodyManager class. The game has 3 states each controlled by different game controllers within an ArrayList.
  */
 package com.processing.particle_engine;
 
@@ -22,7 +22,8 @@ public class Main extends PApplet {
     int curState = 0;
     static String filePath = "mid" + sys.getSeparator();
 
-    String[] midiFiles = { "gardel_por", "MaryHadALittleLamb", "test" };
+    // array of different MIDI file names for background music
+    String[] midiFiles = { "Electric_Bass","Piano","Trumpet","pipe organ","Xylophone","Violoncello"};
 
     MelodyManager melodyManager = new MelodyManager();
 
@@ -31,7 +32,7 @@ public class Main extends PApplet {
         PApplet.main("com.processing.particle_engine.Main");
     }
 
-    // sets up the size of the window
+    // sets up the size of the window and initializes game states
     public void settings() {
 
         size(1500, 1500);
@@ -42,7 +43,7 @@ public class Main extends PApplet {
         melodyManager.addmidiFile(filePath);
     }
 
-    // sets up project
+    // sets up project, including game controllers and MIDI files
     public void setup() {
         gameControllers.forEach((item) -> {
             item.setup();
@@ -58,10 +59,10 @@ public class Main extends PApplet {
         gameControllers.get(curState).draw();
         curState = gameControllers.get(curState).getCurState();
         gameControllers.get(curState).setCurState(curState);
-      //  melodyManager.playMelodies();
-     // melodyManager.playSpecifiMelody(1);
+    
     }
 
+    // adds MIDI files to the melody manager for playback
     public void addMidiFiles() {
         for (int i = 0; i < midiFiles.length; i++) {
             melodyManager.addmidiFile(filePath + midiFiles[i] + ".mid");
@@ -84,7 +85,7 @@ public class Main extends PApplet {
         gameControllers.get(curState).mouseClicked();
     }
 
-    // provide access in Melody manager
+    // provide access in Melody manager for managing background music
     public MelodyManager getMelodyManager()
     {
         return melodyManager;

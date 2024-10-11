@@ -1,3 +1,9 @@
+/*
+ * Name: Maria Murad
+ * Project Name: "Particle Engine"
+ * Date: October 10th, 2024
+ * Description: This class handles MIDI playback by sending melody notes and rhythm data to an external program like Logic via MIDI. It includes methods for settling melodies, start times, and plays the notes with correct timing based on the tempo.
+ */
 package com.processing.particle_engine;
 
 import java.util.ArrayList;
@@ -48,16 +54,19 @@ public class MelodyPlayer {
 		setupMidi();
 	}
 
+	// assigns a melody (list of pitches)
 	void setMelody(ArrayList<Integer> m) {
 		melody = m;
 		hasMelody = true;
 	}
 
+	// assigns rhythm (list of note durations)
 	void setRhythm(ArrayList<Double> r) {
 		rhythm = r;
 		hasRhythm = true;
 	}
 
+	// assigns start times for each note
 	void setStartTimes(ArrayList<Double> r) {
 		startTimes = r;
 		hasStart = true;
@@ -77,6 +86,7 @@ public class MelodyPlayer {
 		//or if on windows - use a windows virtual port
 	}
 
+	// sets tempo
 	void setBPM(float tempo) {
 		bpm = tempo;
 		notems = (float) (((1.0 / (bpm / 60.0))) * 1000); //how many ms in a 1/4 note for this tempo

@@ -1,7 +1,7 @@
 /*
  * Name: Maria Murad
  * Project Name: "Particle Engine"
- * Date: September 30th, 2024
+ * Date: October 10th, 2024
  * Description: This abstract class defines the basic properties and behaviors of a particle. It also includes methods for moving the particle, changing its direction, color, and speed, as well as an abstract method for drawing the particle, that is implemented by subclasses created.
  */
 package com.processing.particle_engine;
@@ -40,14 +40,22 @@ abstract class Particle {
             // add the sound 
             directionY *= -1; // top/bottom edge bouncing 
 
-          //  main.getMelodyManager().start(0);
-            main.getMelodyManager().playSpecifiMelody(0);
+          main.getMelodyManager().playSpecifiMelody(4);
+          if(main.getMelodyManager().isEndOfSound(4)){
+              main.getMelodyManager().start(4);
+          }
+         
+            
         }
         if (x > main.width - radius || x < radius) {
-            // add the sound
-           // main.getMelodyManager().start(0);
-            main.getMelodyManager().playSpecifiMelody(0);
+            
+           
             directionX *= -1; // left/right edge bouncing
+            main.getMelodyManager().playSpecifiMelody(4);
+            if(main.getMelodyManager().isEndOfSound(4)){
+                main.getMelodyManager().start(4);
+            }
+         
         }
     }
 

@@ -1,7 +1,7 @@
 /*
  * Name: Maria Murad
  * Project Name: "Particle Engine"
- * Date: September 30th, 2024
+ * Date: October 10th, 2024
  * Description: This class represents individual square particles. It includes methods for drawing the square, changing its size when the mouse is clicked, and changing its color to red when the 'r' key is pressed. The square reverts to its previous color when any other key is pressed afterward.
  */
 package com.processing.particle_engine;

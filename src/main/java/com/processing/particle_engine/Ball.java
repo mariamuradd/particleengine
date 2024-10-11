@@ -1,7 +1,7 @@
 /* 
  * Name: Maria Murad
  * Project Name: "Particle Engine"
- * Date: September 30th, 2024
+ * Date: October 10th, 2024
  * Description: This class represents individual ball particles. It includes methods for drawing the ball, changing its direction, color, and speed, as well as handling collisions with other balls and implementing additional interactions such as scattering on mouse click.
  */
 package com.processing.particle_engine;
@@ -72,7 +72,10 @@ public class Ball extends Particle  {
             float ax = (targetX - other.x) * 0.05f;
             float ay = (targetY - other.y) * 0.05f;
             // melodies.start(2);
-            // melodies.playSpecifiMelody(2);
+              melodies.playSpecifiMelody(3);
+              if(melodies.isEndOfSound(3)){
+                  melodies.start(3);
+              }
  
             // apply the forces to both balls
             this.xvel -= ax;
